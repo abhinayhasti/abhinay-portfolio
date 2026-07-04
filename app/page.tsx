@@ -17,23 +17,23 @@ export default function Home() {
 
           <div className="hidden md:flex gap-8 text-sm text-gray-300">
 
-            <a href="#" className="hover:text-white transition">
+            <a href="#about" className="hover:text-white transition">
               About
             </a>
 
-            <a href="#" className="hover:text-white transition">
+            <a href="#skills" className="hover:text-white transition">
               Skills
             </a>
 
-            <a href="#" className="hover:text-white transition">
+            <a href="#experience" className="hover:text-white transition">
               Experience
             </a>
 
-            <a href="#" className="hover:text-white transition">
+            <a href="#projects" className="hover:text-white transition">
               Projects
             </a>
 
-            <a href="#" className="hover:text-white transition">
+            <a href="#contact" className="hover:text-white transition">
               Contact
             </a>
 
@@ -71,13 +71,13 @@ export default function Home() {
 
           <div className="flex justify-center gap-4 mt-10">
 
-            <button className="bg-white text-black px-6 py-3 rounded-full font-medium hover:scale-105 transition-all">
+            <a href="#projects" className="bg-white text-black px-6 py-3 rounded-full font-medium hover:scale-105 transition-all">
               View Projects
-            </button>
+            </a>
 
-            <button className="border border-gray-700 px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all">
+            <a href="#contact" className="border border-gray-700 px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all">
               Contact
-            </button>
+            </a>
 
           </div>
 
@@ -86,7 +86,7 @@ export default function Home() {
       </section>
 
       {/* ABOUT SECTION */}
-      <section className="py-32 px-6 border-t border-white/10">
+      <section id="about" className="py-32 px-6 border-t border-white/10">
 
         <div className="max-w-5xl mx-auto">
 
@@ -109,7 +109,7 @@ export default function Home() {
       </section>
 
       {/* SKILLS SECTION */}
-      <section className="py-32 px-6 border-t border-white/10">
+      <section id="skills" className="py-32 px-6 border-t border-white/10">
 
         <div className="max-w-6xl mx-auto">
 
@@ -172,7 +172,7 @@ export default function Home() {
       </section>
 
       {/* EXPERIENCE SECTION */}
-      <section className="py-32 px-6 border-t border-white/10">
+      <section id="experience" className="py-32 px-6 border-t border-white/10">
 
         <div className="max-w-5xl mx-auto">
 
@@ -247,7 +247,7 @@ export default function Home() {
       </section>
 
       {/* PROJECTS SECTION */}
-      <section className="py-32 px-6 border-t border-white/10">
+      <section id="projects" className="py-32 px-6 border-t border-white/10">
 
         <div className="max-w-6xl mx-auto">
 
@@ -276,6 +276,15 @@ export default function Home() {
                 Docker, Helm, and GitOps workflows with ArgoCD.
               </p>
 
+              <a
+                href="https://github.com/abhinayhasti"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium underline underline-offset-4 hover:text-white transition"
+              >
+                View on GitHub →
+              </a>
+
             </div>
 
             <div className="bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1">
@@ -293,6 +302,15 @@ export default function Home() {
                 GitHub Actions, Docker, and Kubernetes deployment workflows.
               </p>
 
+              <a
+                href="https://github.com/abhinayhasti"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium underline underline-offset-4 hover:text-white transition"
+              >
+                View on GitHub →
+              </a>
+
             </div>
 
           </div>
@@ -302,7 +320,7 @@ export default function Home() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section className="py-32 px-6 border-t border-white/10">
+      <section id="contact" className="py-32 px-6 border-t border-white/10">
 
         <div className="max-w-4xl mx-auto text-center">
 
@@ -322,23 +340,25 @@ export default function Home() {
           <div className="flex flex-wrap justify-center gap-6">
 
             <a
-              href="https://github.com/"
+              href="https://github.com/abhinayhasti"
               target="_blank"
+              rel="noopener noreferrer"
               className="bg-white text-black px-6 py-3 rounded-full font-medium hover:scale-105 transition-all"
             >
               GitHub
             </a>
 
             <a
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/in/abhinayhasti"
               target="_blank"
+              rel="noopener noreferrer"
               className="border border-white/20 px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all"
             >
               LinkedIn
             </a>
 
             <a
-              href="mailto:abhinay@example.com"
+              href="mailto:abhinayhasti46@gmail.com"
               className="border border-white/20 px-6 py-3 rounded-full hover:bg-white hover:text-black transition-all"
             >
               Email Me

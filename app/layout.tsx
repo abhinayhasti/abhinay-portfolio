@@ -1,13 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { personal } from "@/app/data/social";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
-// TODO: replace with your real production domain once deployed.
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://abhinayhasti.dev";
+// TODO: swap for a real custom domain if you buy one later — for now this
+// matches the live Vercel deployment.
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://abhinay-portfolio-five.vercel.app";
 
 const title = "Abhinay Hasti | Senior DevOps & Cloud Platform Engineer";
 const description =
@@ -56,6 +59,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -91,7 +95,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

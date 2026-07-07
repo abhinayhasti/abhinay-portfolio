@@ -1,0 +1,73 @@
+<svg viewBox="0 0 860 420" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, sans-serif" role="img" aria-label="Enterprise AKS platform architecture: GitLab CI builds images to Azure Container Registry and deploys to AKS with Helm, on infrastructure provisioned by Terraform modules">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrow-dim" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .box { fill: rgba(255,255,255,0.04); stroke: rgba(255,255,255,0.18); stroke-width: 1.2; }
+      .zone { fill: rgba(56,189,248,0.05); stroke: rgba(56,189,248,0.35); stroke-width: 1.2; stroke-dasharray: 5 4; }
+      .title { fill: #f3f4f6; font-size: 14px; font-weight: 600; }
+      .sub { fill: #9ca3af; font-size: 11px; }
+      .flow { stroke: #38bdf8; stroke-width: 1.6; fill: none; marker-end: url(#arrow); }
+      .provision { stroke: #94a3b8; stroke-width: 1.4; fill: none; stroke-dasharray: 4 4; marker-end: url(#arrow-dim); }
+      .label { fill: #7dd3fc; font-size: 11px; }
+      .dimlabel { fill: #94a3b8; font-size: 11px; }
+      .zonetitle { fill: #7dd3fc; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
+      .badge { fill: rgba(74,222,128,0.1); stroke: rgba(74,222,128,0.4); stroke-width: 1.2; }
+      .badgetext { fill: #4ade80; font-size: 12px; font-weight: 600; }
+    </style>
+  </defs>
+
+  <!-- Pipeline row -->
+  <rect class="box" x="30" y="60" width="130" height="64" rx="12"/>
+  <text class="title" x="95" y="88" text-anchor="middle">Developer</text>
+  <text class="sub" x="95" y="106" text-anchor="middle">merge request</text>
+
+  <rect class="box" x="230" y="60" width="150" height="64" rx="12"/>
+  <text class="title" x="305" y="88" text-anchor="middle">GitLab CI</text>
+  <text class="sub" x="305" y="106" text-anchor="middle">build · test · deploy</text>
+
+  <rect class="box" x="450" y="60" width="150" height="64" rx="12"/>
+  <text class="title" x="525" y="88" text-anchor="middle">Azure ACR</text>
+  <text class="sub" x="525" y="106" text-anchor="middle">container registry</text>
+
+  <path class="flow" d="M 160 92 H 226"/>
+  <text class="label" x="193" y="84" text-anchor="middle">push</text>
+  <path class="flow" d="M 380 92 H 446"/>
+  <text class="label" x="413" y="84" text-anchor="middle">docker push</text>
+
+  <!-- AKS cluster -->
+  <rect class="zone" x="670" y="40" width="160" height="240" rx="14"/>
+  <text class="zonetitle" x="750" y="68" text-anchor="middle">Azure AKS</text>
+  <rect class="box" x="686" y="86" width="128" height="52" rx="10"/>
+  <text class="title" x="750" y="108" text-anchor="middle" font-size="13">Ingress</text>
+  <text class="sub" x="750" y="126" text-anchor="middle">TLS · routing</text>
+  <rect class="box" x="686" y="150" width="128" height="52" rx="10"/>
+  <text class="title" x="750" y="172" text-anchor="middle" font-size="13">Services</text>
+  <text class="sub" x="750" y="190" text-anchor="middle">Helm releases</text>
+  <rect class="box" x="686" y="214" width="128" height="52" rx="10"/>
+  <text class="title" x="750" y="236" text-anchor="middle" font-size="13">Autoscaling</text>
+  <text class="sub" x="750" y="254" text-anchor="middle">HPA · node pools</text>
+
+  <path class="flow" d="M 525 128 C 525 180, 610 176, 666 176"/>
+  <text class="label" x="580" y="200" text-anchor="middle">image pull</text>
+  <path class="flow" d="M 305 128 C 305 230, 560 240, 682 240" />
+  <text class="label" x="480" y="252" text-anchor="middle">helm upgrade</text>
+
+  <!-- Terraform -->
+  <rect class="box" x="230" y="310" width="200" height="70" rx="12"/>
+  <text class="title" x="330" y="338" text-anchor="middle">Terraform Modules</text>
+  <text class="sub" x="330" y="356" text-anchor="middle">reusable · versioned</text>
+
+  <path class="provision" d="M 430 336 C 540 336, 560 128, 596 128 L 525 128" />
+  <path class="provision" d="M 430 345 C 620 350, 660 300, 690 286"/>
+  <text class="dimlabel" x="560" y="368" text-anchor="middle">provisions ACR + AKS</text>
+
+  <!-- Outcome badge -->
+  <rect class="badge" x="30" y="316" width="160" height="58" rx="12"/>
+  <text class="badgetext" x="110" y="341" text-anchor="middle">Release cycle</text>
+  <text class="badgetext" x="110" y="361" text-anchor="middle">time down 40%</text>
+</svg>

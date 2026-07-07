@@ -1,8 +1,9 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send } from "lucide-react";
+import { CheckCircle2, Loader2, Mail, MapPin, Send } from "lucide-react";
+import { sendContactMessage, ContactState } from "@/app/actions/contact";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/social-icons";
 import { personal } from "@/app/data/social";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -16,17 +17,24 @@ const contactItems = [
   { icon: MapPin, label: "Location", value: personal.location, href: undefined },
 ];
 
+const initialState: ContactState = { status: "idle" };
+
 export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [state, formAction, pending] = useActionState(
+    sendContactMessage,
+    initialState
+  );
 
-  // No backend wired up yet — this opens the user's mail client pre-filled.
-  // TODO: swap for a real endpoint (e.g. Formspree, Resend, or a Next.js API route) later.
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
+  // When no email API key is configured on the server, fall back to the
+  // visitor's mail client so the form is never a dead end.
+  useEffect(() => {
+    if (state.status !== "unconfigured") return;
     const subject = encodeURIComponent(`Portfolio contact from ${form.name || "a visitor"}`);
     const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
     window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- fire only when the action reports unconfigured
+  }, [state]);
 
   return (
     <section id="contact" className="border-t border-white/10 px-6 py-32">
@@ -69,13 +77,23 @@ export function Contact() {
 
           <Reveal delay={0.1} className="md:col-span-3">
             <GlassCard>
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form action={formAction} className="space-y-5">
+                {/* Honeypot for bots — hidden from real users and screen readers */}
+                <input
+                  type="text"
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="hidden"
+                />
                 <div>
                   <label htmlFor="name" className="mb-2 block text-sm text-gray-400">
                     Name
                   </label>
                   <input
                     id="name"
+                    name="name"
                     required
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -90,6 +108,7 @@ export function Contact() {
                   </label>
                   <input
                     id="email"
+                    name="email"
                     type="email"
                     required
                     value={form.email}
@@ -105,6 +124,7 @@ export function Contact() {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
                     required
                     rows={4}
                     value={form.message}
@@ -116,10 +136,39 @@ export function Contact() {
 
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-medium text-black transition-all hover:scale-105"
+                  disabled={pending}
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-medium text-black transition-all hover:scale-105 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
                 >
-                  <Send size={16} /> Send Message
+                  {pending ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" /> Sending…
+                    </>
+                  ) : (
+                    <>
+                      <Send size={16} /> Send Message
+                    </>
+                  )}
                 </button>
+
+                {state.status === "success" && (
+                  <p
+                    role="status"
+                    className="flex items-center gap-2 text-sm text-emerald-400"
+                  >
+                    <CheckCircle2 size={16} /> Message sent — I&apos;ll get back
+                    to you soon.
+                  </p>
+                )}
+                {state.status === "error" && (
+                  <p role="alert" className="text-sm text-red-400">
+                    {state.message}
+                  </p>
+                )}
+                {state.status === "unconfigured" && (
+                  <p role="status" className="text-sm text-gray-400">
+                    Opening your mail client instead…
+                  </p>
+                )}
               </form>
             </GlassCard>
           </Reveal>

@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { ExternalLink, Workflow } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/icons/social-icons";
 import { projects } from "@/app/data/projects";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -23,7 +24,7 @@ export function Projects() {
           staggerDelay={0.1}
         >
           {projects.map((project) => (
-            <motion.div key={project.title} variants={staggerItem}>
+            <motion.div key={project.slug} variants={staggerItem}>
               <GlassCard className="flex h-full flex-col">
                 <p className="mb-3 text-sm text-gray-500">
                   {project.tagline}
@@ -35,10 +36,15 @@ export function Projects() {
                   {project.description}
                 </p>
 
-                {project.hasArchitectureDiagram && (
-                  <div className="mb-6 flex items-center gap-3 rounded-2xl border border-dashed border-white/15 bg-white/[0.02] px-5 py-4 text-sm text-gray-500">
-                    <Workflow size={18} className="text-sky-400/70" />
-                    Architecture diagram — add yours here
+                {project.diagram && (
+                  <div className="mb-6 overflow-hidden rounded-2xl border border-white/10 bg-black/40 p-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element -- static SVG, no optimization needed */}
+                    <img
+                      src={project.diagram.src}
+                      alt={project.diagram.alt}
+                      loading="lazy"
+                      className="h-auto w-full"
+                    />
                   </div>
                 )}
 
@@ -54,6 +60,12 @@ export function Projects() {
                 </div>
 
                 <div className="mt-auto flex flex-wrap gap-4">
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className="inline-flex items-center gap-2 text-sm font-medium text-sky-400 underline-offset-4 hover:text-sky-300 hover:underline"
+                  >
+                    Read case study <ArrowRight size={16} />
+                  </Link>
                   {project.githubUrl && (
                     <a
                       href={project.githubUrl}

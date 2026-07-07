@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navItems } from "@/app/data/nav";
@@ -35,23 +36,23 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a
-          href="#home"
+        <Link
+          href="/#home"
           className="text-xl font-bold tracking-tight text-white"
           onClick={() => setOpen(false)}
         >
           Abhinay<span className="text-sky-400">.</span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-8 text-sm text-gray-300 md:flex">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
               className="relative transition hover:text-white"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -77,17 +78,21 @@ export function Navbar() {
           >
             <div className="flex flex-col px-6 py-6">
               {navItems.map((item, i) => (
-                <motion.a
+                <motion.div
                   key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="border-b border-white/5 py-4 text-lg text-gray-200 last:border-none"
+                  className="border-b border-white/5 last:border-none"
                 >
-                  {item.label}
-                </motion.a>
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="block py-4 text-lg text-gray-200"
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </motion.nav>

@@ -1,0 +1,91 @@
+<svg viewBox="0 0 860 440" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, sans-serif" role="img" aria-label="HIPAA cloud migration architecture: on-premise workloads migrated to an AWS VPC with Istio service mesh, provisioned by Terraform with remote state, secured by SAST and DAST scanning in the pipeline">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrow-dim" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#94a3b8"/>
+    </marker>
+    <style>
+      .box { fill: rgba(255,255,255,0.04); stroke: rgba(255,255,255,0.18); stroke-width: 1.2; }
+      .zone { fill: rgba(56,189,248,0.05); stroke: rgba(56,189,248,0.35); stroke-width: 1.2; stroke-dasharray: 5 4; }
+      .legacy { fill: rgba(255,255,255,0.02); stroke: rgba(255,255,255,0.25); stroke-width: 1.2; stroke-dasharray: 5 4; }
+      .title { fill: #f3f4f6; font-size: 14px; font-weight: 600; }
+      .sub { fill: #9ca3af; font-size: 11px; }
+      .flow { stroke: #38bdf8; stroke-width: 1.6; fill: none; marker-end: url(#arrow); }
+      .provision { stroke: #94a3b8; stroke-width: 1.4; fill: none; stroke-dasharray: 4 4; marker-end: url(#arrow-dim); }
+      .label { fill: #7dd3fc; font-size: 11px; }
+      .dimlabel { fill: #94a3b8; font-size: 11px; }
+      .zonetitle { fill: #7dd3fc; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
+      .sec { fill: rgba(74,222,128,0.1); stroke: rgba(74,222,128,0.4); stroke-width: 1.2; }
+      .sectext { fill: #4ade80; font-size: 12px; font-weight: 600; }
+    </style>
+  </defs>
+
+  <!-- On-prem -->
+  <rect class="legacy" x="30" y="60" width="170" height="170" rx="14"/>
+  <text class="zonetitle" x="115" y="88" text-anchor="middle" fill="#9ca3af">ON-PREMISE</text>
+  <rect class="box" x="48" y="106" width="134" height="48" rx="10"/>
+  <text class="title" x="115" y="126" text-anchor="middle" font-size="13">Legacy Apps</text>
+  <text class="sub" x="115" y="144" text-anchor="middle">monolith services</text>
+  <rect class="box" x="48" y="166" width="134" height="48" rx="10"/>
+  <text class="title" x="115" y="186" text-anchor="middle" font-size="13">Databases</text>
+  <text class="sub" x="115" y="204" text-anchor="middle">patient records</text>
+
+  <path class="flow" d="M 200 145 H 266"/>
+  <text class="label" x="233" y="137" text-anchor="middle">migrate</text>
+
+  <!-- AWS VPC -->
+  <rect class="zone" x="270" y="40" width="360" height="230" rx="14"/>
+  <text class="zonetitle" x="450" y="68" text-anchor="middle">AWS · PRIVATE VPC</text>
+
+  <rect class="box" x="290" y="86" width="150" height="52" rx="10"/>
+  <text class="title" x="365" y="108" text-anchor="middle" font-size="13">Microservices</text>
+  <text class="sub" x="365" y="126" text-anchor="middle">containerized</text>
+
+  <rect class="box" x="460" y="86" width="150" height="52" rx="10"/>
+  <text class="title" x="535" y="108" text-anchor="middle" font-size="13">Istio Mesh</text>
+  <text class="sub" x="535" y="126" text-anchor="middle">mTLS · traffic policy</text>
+
+  <rect class="box" x="290" y="156" width="150" height="52" rx="10"/>
+  <text class="title" x="365" y="178" text-anchor="middle" font-size="13">Managed Data</text>
+  <text class="sub" x="365" y="196" text-anchor="middle">encrypted at rest</text>
+
+  <rect class="box" x="460" y="156" width="150" height="52" rx="10"/>
+  <text class="title" x="535" y="178" text-anchor="middle" font-size="13">Audit &amp; Logs</text>
+  <text class="sub" x="535" y="196" text-anchor="middle">CloudTrail · CloudWatch</text>
+
+  <rect class="sec" x="290" y="222" width="320" height="34" rx="10"/>
+  <text class="sectext" x="450" y="244" text-anchor="middle">HIPAA controls: encryption · least privilege · audit trails</text>
+
+  <!-- Terraform -->
+  <rect class="box" x="270" y="330" width="180" height="70" rx="12"/>
+  <text class="title" x="360" y="358" text-anchor="middle">Terraform</text>
+  <text class="sub" x="360" y="376" text-anchor="middle">IaC provisioning</text>
+
+  <rect class="box" x="490" y="330" width="180" height="70" rx="12"/>
+  <text class="title" x="580" y="358" text-anchor="middle">Remote State</text>
+  <text class="sub" x="580" y="376" text-anchor="middle">S3 + DynamoDB locking</text>
+
+  <path class="provision" d="M 360 326 L 360 274"/>
+  <text class="dimlabel" x="368" y="304">provisions</text>
+  <path class="provision" d="M 490 365 H 454"/>
+
+  <!-- Security pipeline -->
+  <rect class="zone" x="660" y="40" width="170" height="230" rx="14"/>
+  <text class="zonetitle" x="745" y="68" text-anchor="middle">PIPELINE GATES</text>
+  <rect class="box" x="678" y="86" width="134" height="48" rx="10"/>
+  <text class="title" x="745" y="106" text-anchor="middle" font-size="13">SAST</text>
+  <text class="sub" x="745" y="124" text-anchor="middle">SonarQube</text>
+  <rect class="box" x="678" y="148" width="134" height="48" rx="10"/>
+  <text class="title" x="745" y="168" text-anchor="middle" font-size="13">DAST</text>
+  <text class="sub" x="745" y="186" text-anchor="middle">runtime scanning</text>
+  <rect class="box" x="678" y="210" width="134" height="48" rx="10"/>
+  <text class="title" x="745" y="230" text-anchor="middle" font-size="13">Deploy</text>
+  <text class="sub" x="745" y="248" text-anchor="middle">gated release</text>
+
+  <path class="flow" d="M 745 134 V 144"/>
+  <path class="flow" d="M 745 196 V 206"/>
+  <path class="flow" d="M 674 234 C 650 234, 648 172, 614 172"/>
+  <text class="label" x="648" y="216" text-anchor="middle">ship</text>
+</svg>

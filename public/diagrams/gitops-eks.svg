@@ -1,0 +1,78 @@
+<svg viewBox="0 0 860 460" xmlns="http://www.w3.org/2000/svg" font-family="ui-sans-serif, system-ui, sans-serif" role="img" aria-label="GitOps delivery platform architecture: GitHub Actions builds images to Artifactory, ArgoCD syncs manifests to EKS, logs flow through ELK to Kibana">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+    <style>
+      .box { fill: rgba(255,255,255,0.04); stroke: rgba(255,255,255,0.18); stroke-width: 1.2; rx: 12; }
+      .zone { fill: rgba(56,189,248,0.05); stroke: rgba(56,189,248,0.35); stroke-width: 1.2; stroke-dasharray: 5 4; rx: 14; }
+      .title { fill: #f3f4f6; font-size: 14px; font-weight: 600; }
+      .sub { fill: #9ca3af; font-size: 11px; }
+      .flow { stroke: #38bdf8; stroke-width: 1.6; fill: none; marker-end: url(#arrow); }
+      .label { fill: #7dd3fc; font-size: 11px; }
+      .zonetitle { fill: #7dd3fc; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; }
+    </style>
+  </defs>
+
+  <!-- CI row -->
+  <rect class="box" x="30" y="50" width="130" height="64" rx="12"/>
+  <text class="title" x="95" y="78" text-anchor="middle">Developer</text>
+  <text class="sub" x="95" y="96" text-anchor="middle">git push</text>
+
+  <rect class="box" x="240" y="50" width="150" height="64" rx="12"/>
+  <text class="title" x="315" y="78" text-anchor="middle">GitHub Actions</text>
+  <text class="sub" x="315" y="96" text-anchor="middle">build · test · package</text>
+
+  <rect class="box" x="470" y="50" width="140" height="64" rx="12"/>
+  <text class="title" x="540" y="78" text-anchor="middle">Artifactory</text>
+  <text class="sub" x="540" y="96" text-anchor="middle">Docker registry</text>
+
+  <path class="flow" d="M 160 82 H 236"/>
+  <text class="label" x="198" y="74" text-anchor="middle">commit</text>
+  <path class="flow" d="M 390 82 H 466"/>
+  <text class="label" x="428" y="74" text-anchor="middle">docker push</text>
+
+  <!-- GitOps row -->
+  <rect class="box" x="240" y="180" width="150" height="64" rx="12"/>
+  <text class="title" x="315" y="208" text-anchor="middle">Config Repo</text>
+  <text class="sub" x="315" y="226" text-anchor="middle">Helm values · manifests</text>
+
+  <rect class="box" x="470" y="180" width="140" height="64" rx="12"/>
+  <text class="title" x="540" y="208" text-anchor="middle">ArgoCD</text>
+  <text class="sub" x="540" y="226" text-anchor="middle">GitOps sync</text>
+
+  <path class="flow" d="M 315 114 V 176"/>
+  <text class="label" x="322" y="150">bump image tag</text>
+  <path class="flow" d="M 390 212 H 466"/>
+  <text class="label" x="428" y="204" text-anchor="middle">watch</text>
+
+  <!-- EKS cluster -->
+  <rect class="zone" x="660" y="60" width="170" height="260" rx="14"/>
+  <text class="zonetitle" x="745" y="88" text-anchor="middle">AWS EKS</text>
+  <rect class="box" x="678" y="106" width="134" height="52" rx="10"/>
+  <text class="title" x="745" y="128" text-anchor="middle" font-size="13">App Workloads</text>
+  <text class="sub" x="745" y="146" text-anchor="middle">Helm releases</text>
+  <rect class="box" x="678" y="172" width="134" height="52" rx="10"/>
+  <text class="title" x="745" y="194" text-anchor="middle" font-size="13">Selenium Grid</text>
+  <text class="sub" x="745" y="212" text-anchor="middle">dynamic test pods</text>
+  <rect class="box" x="678" y="238" width="134" height="52" rx="10"/>
+  <text class="title" x="745" y="260" text-anchor="middle" font-size="13">Filebeat</text>
+  <text class="sub" x="745" y="278" text-anchor="middle">log shipper</text>
+
+  <path class="flow" d="M 610 212 L 656 212"/>
+  <text class="label" x="633" y="204" text-anchor="middle">deploy</text>
+
+  <!-- Observability row -->
+  <rect class="box" x="470" y="360" width="140" height="64" rx="12"/>
+  <text class="title" x="540" y="388" text-anchor="middle">ELK Stack</text>
+  <text class="sub" x="540" y="406" text-anchor="middle">Elasticsearch · Logstash</text>
+
+  <rect class="box" x="240" y="360" width="150" height="64" rx="12"/>
+  <text class="title" x="315" y="388" text-anchor="middle">Kibana</text>
+  <text class="sub" x="315" y="406" text-anchor="middle">dashboards · alerts</text>
+
+  <path class="flow" d="M 700 320 C 680 360, 640 392, 614 392"/>
+  <text class="label" x="668" y="366" text-anchor="middle">logs</text>
+  <path class="flow" d="M 466 392 H 394"/>
+  <text class="label" x="430" y="384" text-anchor="middle">visualize</text>
+</svg>
